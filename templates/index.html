@@ -125,7 +125,7 @@
                 {% for publication_path in publications.pages %}
                 <li class="content">
                     {% set publication = get_page(path=publication_path.relative_path) %}
-                    {{ macros::post_header(post=publication, thumbnail=true) }}
+                    {{ macros::publication_list_element(publication=publication, buttons=true) }}
                 </li>
                 {% endfor %}
             </ul>

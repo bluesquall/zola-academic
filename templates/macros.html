@@ -72,6 +72,10 @@
 </a>
 {% endmacro %}
 
+{% macro publication_list_element(publication) %}
+  <a class="has-text-link" href="{{ get_url(path=publication.path) | safe }}">{{ publication.title }}</a>
+{% endmacro %}
+
 {% macro webp(path, page) %}
 {% if path is matching(".webp$") %}
 {{ path }}
