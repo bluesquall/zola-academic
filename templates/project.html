@@ -9,7 +9,8 @@
         {% if page.extra.image.style == "banner" %}
         <section class="hero">
             <figure class="image caption-container">
-                <img class="img-captioned" src="{{ macros::webp(path = page.extra.image.path, page = page) }}">
+                <!--TODO: Why doesn't this work?-->
+                <img class="img-captioned" src="{{ page.extra.image.path }}">
                 {% if page.extra.image.caption %}
                 <p class="caption">{{ page.extra.image.caption }}</p>
                 {% endif %}

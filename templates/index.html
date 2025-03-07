@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% import "macros.html" as macros %}
+{% import "project_tile.html" as m_project %}
+
 {% block content %}
 <section class="section">
     <div class="container">
@@ -76,6 +78,36 @@
     </div>
 </section>
 
+{% if config.extra.show_projects %}
+{% set projects = get_section(path="projects/_index.md") %}
+<section class="section">
+    <div class="container">
+        <div class="columns is-desktop">
+            <div class="column is-one-third-desktop">
+                <h1 class="title is-1" id="projects">
+                    <a class="has-text-link" href="{{ get_url(path='projects') | safe }}">
+                       {{ projects.title }}
+                    </a>
+                </h1>
+                {% if projects.description %}
+                    <h4 class="title is-4">{{ projects.description }}</h4>
+                {% endif %}
+            </div>
+            <ul class="column is-two-thirds-desktop">
+                <div class="columns is-multiline is-desktop">
+                    {% for project_path in projects.pages %}
+                        <li class="content column is-one-third">
+                            {% set project = get_page(path=project_path.relative_path) %}
+                            {{ m_project::project_tile(project=project) }}
+                        </li>
+                    {% endfor %}
+                </div>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endif %}
+
 {% if config.extra.show_publications %}
 {% set publications = get_section(path="publications/_index.md") %}
 <section class="section">
@@ -126,36 +158,6 @@
                     {{ macros::post_header(post=post, thumbnail=true) }}
                 </li>
                 {% endfor %}
-            </ul>
-        </div>
-    </div>
-</section>
-{% endif %}
-
-{% if config.extra.show_projects %}
-{% set projects = get_section(path="projects/_index.md") %}
-<section class="section">
-    <div class="container">
-        <div class="columns is-desktop">
-            <div class="column is-one-third-desktop">
-                <h1 class="title is-1" id="projects">
-                    <a class="has-text-link" href="{{ get_url(path='projects') | safe }}">
-                       {{ projects.title }}
-                    </a>
-                </h1>
-                {% if projects.description %}
-                    <h4 class="title is-4">{{ projects.description }}</h4>
-                {% endif %}
-            </div>
-            <ul class="column is-two-thirds-desktop">
-                <div class="columns is-multiline is-desktop">
-                    {% for project_path in projects.pages %}
-                        <li class="content column is-one-third">
-                            {% set project = get_page(path=project_path.relative_path) %}
-                            {{ macros::project_header(project=project) }}
-                        </li>
-                    {% endfor %}
-                </div>
             </ul>
         </div>
     </div>

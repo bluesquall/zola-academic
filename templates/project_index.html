@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% import "project_tile.html" as m %}
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="title is-1">{{ section.title }}</h1>
+        <ul class="content">
+            {% for page in section.pages %}
+            <li class="content">{{ m::project_tile(project=get_page(path=page.relative_path)) }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endblock content %}

@@ -1,5 +1,4 @@
-{% set resized = resize_image(path=page.colocated_path ~ img_name, width=width, op="fit_width") %}
 <figure>
-  <img alt="{{ caption }}" src="{{ resized.url | safe }}" />
+  <img alt="{{ caption }}" src="{{ img_name | safe }}" />
   <figcaption>{{ caption }}</figcaption>
 </figure>

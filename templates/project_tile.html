@@ -1,0 +1,20 @@
+{% macro project_tile(project) %}
+<div class="columns is-desktop">
+    <div class="column is-desktop is-two-thirds">
+        <h2><a class="has-text-link" href="{{ get_url(path=project.path) | safe }}">{{ project.title }}</a></h2>
+    </div>
+    {% if project.extra.image %}
+        {%- if project.relative_path is matching("[.]md$") -%}
+            {% set asset_path = project.relative_path | trim_end_matches(pat=".md") %}
+        {%- else -%}
+            {% set asset_path = project.relative_path | trim_end_matches(pat="/index.md") %}
+        {%- endif -%}
+    {% set img = resize_image(path = asset_path ~ "/" ~ project.extra.image.path, width=256, op='fit_width', format="webp") %}
+    <div class="column is-desktop is-one-third container">
+        <figure class="image is-192x192">
+            <img src="{{ img.url | safe }}">
+        </figure>
+    </div>
+    {% endif %}
+</div>
+{% endmacro %}
