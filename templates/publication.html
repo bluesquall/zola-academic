@@ -45,21 +45,63 @@
             </div>
         </div>
         {% endif %}
-        {% endif %}
-        {% endif %}
+    {% endif %}
+{% endif %}
 
 <section class="section">
     <div class="container">
         <div class="columns is-desktop">
             <div class="column is-8-desktop is-offset-2-desktop is-12-tablet">
                 <div class="content">
+                    <div>
+                        <h1> {{page.title}} </h1>
+                    </div>
                     {% if page.extra %}
+
+                    {% if page.extra.authors %}
+                    <div>
+                        {{ page.extra.authors | join(sep=", ") }}
+                    </div>
+                    {% endif %}
+
+                    {% if page.extra.publication %}
+                    <div>
+                        {{ page.extra.publication }}
+                        {% if page.extra.publication_location %}
+                          {{ page.extra.publication_location }}
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    {% if page.date %}
+                    <div>
+                        {{ page.date }}
+                    </div>
+                    {% elif page.extra.year %}
+                    <div>
+                        {{ page.extra.year }}
+                    </div>
+                    {% endif %}
+
                     {% if page.extra.abstract %}
                     <div>
+                        <br/>
                         <h3>Abstract</h3>
                         {{ page.extra.abstract }}
                     </div>
                     {% endif %}
+
+                    {% if page.extra.links %}
+                    <div>
+                        <br/>
+                        {% for link in page.extra.links %}
+                            {% if link.link is starting_with("http://") or link.link is starting_with("https://") %}
+                            <a class="button mr-2 is-link is-outlined is-small" href="{{ link.link | safe }}"> {{link.name | safe }} </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
                     {% if page.extra.toc %}
                     <h1>Table of contents</h1>
                     <ul>
