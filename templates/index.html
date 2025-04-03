@@ -119,15 +119,30 @@
                 </h1>
                 {% if publications.description %}
                     <h4 class="title is-4">{{ publications.description }}</h4>
+<!--
+                    {% if publications.description in ["selected publications", "selected", "featured", ] %}
+                        <h5>
+                            <a class="has-text-link" href="{{ get_url(path='publications') | safe }}"> ... see more ...</a>
+                        </h5>
+                    {% endif %}
+-->
                 {% endif %}
             </div>
             <ul class="column is-two-thirds-desktop">
                 {% for publication_path in publications.pages %}
-                <li class="content">
                     {% set publication = get_page(path=publication_path.relative_path) %}
-                    {{ macros::publication_list_element(publication=publication, buttons=true) }}
-                </li>
+                    {% if publication.extra.selected %}
+                    <li class="content">
+                        {{ macros::publication_list_element(publication=publication, buttons=true) }}
+                    </li>
+                    {% endif %}
                 {% endfor %}
+                    {% if publications.description in ["selected publications", "selected", "featured", ] %}
+                        <li>
+                            <a class="has-text-link" href="{{ get_url(path='publications') | safe }}"> ... see more ...</a>
+                        </li>
+                    {% endif %}
+
             </ul>
         </div>
     </div>
