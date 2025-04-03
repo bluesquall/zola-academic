@@ -73,7 +73,9 @@
 {% endmacro %}
 
 {% macro publication_list_element(publication) %}
-  <a class="has-text-link" href="{{ get_url(path=publication.path) | safe }}">{{ publication.title }}</a>
+<h4>
+  <a class="has-text-link" href="{{ get_url(path=publication.path) | safe }}"> {{ publication.title }} </a>
+</h4>
 {% endmacro %}
 
 {% macro webp(path, page) %}
