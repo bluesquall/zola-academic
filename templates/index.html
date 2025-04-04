@@ -177,12 +177,37 @@
 </section>
 {% endif %}
 
+{% if config.extra.show_etc %}
+{% set page = get_page(path="etc.md") %}
+<section id="etc" class="section">
+    <div class="container">
+        <div class="columns is-desktop">
+            <div class="column is-one-third-desktop">
+                <h1 class="title is-1" id="etc">
+                    <a class="has-text-link" href="#etc">
+                      {{ page.title | safe }}
+                    </a>
+                </h1>
+                {% if page.description %}
+                    <h4 class="title is-4">{{ page.description }}</h4>
+                {% endif %}
+            </div>
+            <div class="column is-two-thirds-desktop">
+                <div class="content">
+                    {{ page.content | safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
 <section id="contact" class="section">
     <div class="container">
         <div class="columns is-desktop">
             <div class="column is-one-third-desktop">
                 <h1 class="title is-1">
-                    <a class="has-text-link" href="#contact">Contact</a>
+                    <a class="has-text-link" href="#contact">contact</a>
                 </h1>
             </div>
             <div class="column is-two-thirds-desktop">
